@@ -1,0 +1,75 @@
+﻿@page "/application"
+@using CollegeBlazorApp.Server.Models
+@using System.Net.Http
+@using System.Net.Http.Json
+@inject HttpClient Http
+@inject NavigationManager Navigation
+
+@inject HttpClient Http
+@inject IConfiguration Configuration
+
+<h3>Apply Now</h3>
+<br/>
+
+<div class="row">
+    <div class="col-md-4">
+        <EditForm Model="@applicant" OnValidSubmit="@HandleValidSubmit">
+
+            <DataAnnotationsValidator />
+        
+            <label for="firstName" class="mb-2">First Name</label>
+            <InputText @bind-Value="applicant.FirstName" class="form-control mb-3" name="firstName" id="firstName" placeholder="Mohammad" />
+            <ValidationMessage For="@(()=> applicant.FirstName)" />
+      
+            <label for="firstName" class="mb-2">Last Name</label>
+            <InputText @bind-Value="applicant.LastName" class="form-control mb-3" name="lastName" id="lastName" placeholder="Shariq" />
+            <ValidationMessage For="@(()=> applicant.LastName)" />
+
+            <label for="firstName" class="mb-2">Applicant ID</label>
+            <InputText @bind-Value="applicant.ApplicantId" class="form-control mb-3" name="applicantId" id="applicantId" placeholder="W0439022" />
+            <ValidationMessage For="@(()=> applicant.ApplicantId)" />
+
+            <label for="email" class="mb-2">Email</label>
+            <InputText @bind-Value="applicant.Email" class="form-control mb-3" name="email" id="email" placeholder="shariqsway@outlook.com" />
+            <ValidationMessage For="@(()=> applicant.Email)" />
+
+
+            <label for="programChoices" class="mb-2">Program Choices</label>
+            <InputSelect @bind-Value="ProgramPicked" class="form-control mb-3" name="email" id="email">
+                @if (ProgramChoices != null)
+                { 
+                    @foreach(var program in ProgramChoices)
+                    {
+                        <option value="@program.ProgramCode">@program.ProgramDescription</option>
+                    }
+                }
+            </InputSelect>
+
+            
+            <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
+
+        </EditForm>
+    </div>
+</div>
+
+
+@code {
+
+    public Applicant applicant = new Applicant();
+
+    public void HandleValidSubmit()
+    {
+        Navigation.NavigateTo("/success");
+    }
+
+    public string ProgramPicked { get; set; }
+
+    public Program[] ProgramChoices;
+
+    protected override async Task OnInitializedAsync()
+    {
+        ProgramChoices = await Http.GetFromJsonAsync<Program[]>("https://nscc-inft3075-program-list.azurewebsites.net/api/HttpTrigger1?code=xI1okgD/Rb06W7myuSH8DkkXdvVgOX5IJpCz8kk1V3l9NsyTEhvgRg==");
+    }
+
+}
+

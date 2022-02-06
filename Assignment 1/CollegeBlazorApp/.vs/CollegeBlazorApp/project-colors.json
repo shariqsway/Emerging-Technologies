@@ -1,0 +1,21 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "6c251a37-1570-4eb4-aeec-2c273de970a3": {
+      "ProjectGuid": "6c251a37-1570-4eb4-aeec-2c273de970a3",
+      "DisplayName": "CollegeBlazorApp.Server",
+      "ColorIndex": 0
+    },
+    "9904990a-32de-44c4-80b2-995d0dab9b63": {
+      "ProjectGuid": "9904990a-32de-44c4-80b2-995d0dab9b63",
+      "DisplayName": "CollegeBlazorApp.Client",
+      "ColorIndex": 1
+    },
+    "283adacf-9979-4fd2-96a9-dc4dd32d3621": {
+      "ProjectGuid": "283adacf-9979-4fd2-96a9-dc4dd32d3621",
+      "DisplayName": "CollegeBlazorApp.Shared",
+      "ColorIndex": 2
+    }
+  },
+  "NextColorIndex": 3
+}
